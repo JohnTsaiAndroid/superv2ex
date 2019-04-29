@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_hot_topic"
+        android:title="@string/menu_hot_topic"
+        android:icon="@mipmap/ic_hot_topic" />
+    <item android:id="@+id/action_latest_topic"
+        android:title="@string/menu_latest_topic"
+        android:icon="@mipmap/ic_latest_topic" />
+    <item android:id="@+id/action_node_info"
+        android:title="@string/menu_node_info"
+        android:icon="@mipmap/ic_node" />
+</menu>
