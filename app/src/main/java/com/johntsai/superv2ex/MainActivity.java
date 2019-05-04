@@ -1,7 +1,6 @@
 package com.johntsai.superv2ex;
 
 import android.os.Bundle;
-import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.MenuItem;
 
@@ -10,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.johntsai.superv2ex.ui.FragmentPagerAdapter;
+import com.johntsai.superv2ex.adapter.FragmentPagerAdapter;
 import com.johntsai.superv2ex.ui.HotTopicFragment;
 import com.johntsai.superv2ex.ui.LatestTopicFragment;
 import com.johntsai.superv2ex.ui.NodeInfoFragment;
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         pagerAdapter.addFragment(new NodeInfoFragment());
 
         mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setOffscreenPageLimit(2);
 
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -60,20 +60,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
             @Override
             public void onPageSelected(int position) {
-               mBottomNavigationView.setSelectedItemId(array.get(position));
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+                mBottomNavigationView.setSelectedItemId(array.get(position));
             }
         });
 

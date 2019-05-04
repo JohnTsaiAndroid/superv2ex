@@ -4,5 +4,7 @@ data class Topic(
         val lastReplyBy:String,
         val node:Node,
         val member:Member,
-        val url: String
+        val url: String,
+        val content: String,
+        val title: String
 )

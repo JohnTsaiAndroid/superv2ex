@@ -1,4 +1,4 @@
-package com.johntsai.superv2ex.ui;
+package com.johntsai.superv2ex.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
