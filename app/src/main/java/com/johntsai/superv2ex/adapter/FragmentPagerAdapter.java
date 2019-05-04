@@ -26,7 +26,7 @@ public class FragmentPagerAdapter extends androidx.fragment.app.FragmentPagerAda
         return fragmentList.size();
     }
 
-    public void addFragment(Fragment fragment){
+    public void addFragment(Fragment fragment) {
         fragmentList.add(fragment);
     }
 }

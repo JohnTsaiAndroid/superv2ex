@@ -1,7 +1,7 @@
 package com.johntsai.superv2ex
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 
-class WebActivity: Activity() {
+class WebActivity: AppCompatActivity() {
 
 }

@@ -1,7 +1,6 @@
 package com.johntsai.superv2ex.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,8 +37,6 @@ class HotTopicFragment : Fragment() {
 
 
         call = RetrofitInstance.get().service.hotTopic()
-
-        Log.d("cj", "onViewCreated")
 
         call.enqueue(object : Callback<List<Topic>>{
             override fun onFailure(call: Call<List<Topic>>, t: Throwable) {

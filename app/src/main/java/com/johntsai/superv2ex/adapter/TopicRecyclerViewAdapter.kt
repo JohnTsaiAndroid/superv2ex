@@ -14,10 +14,10 @@ import com.johntsai.superv2ex.R
 import com.johntsai.superv2ex.data.Topic
 
 
-class TopicRecyclerViewAdapter(val context:Context, val dataList: List<Topic>): RecyclerView.Adapter<TopicRecyclerViewAdapter.ViewHolder>(){
+class TopicRecyclerViewAdapter(val context: Context, val dataList: List<Topic>) : RecyclerView.Adapter<TopicRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val holder =  ViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_topic, parent, false))
-        holder.view.setOnClickListener { v ->  }
+        val holder = ViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_topic, parent, false))
+        holder.view.setOnClickListener { v -> }
         return holder
     }
 
@@ -39,9 +39,9 @@ class TopicRecyclerViewAdapter(val context:Context, val dataList: List<Topic>): 
     }
 
 
-    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view){
-        var textView : TextView = view.findViewById(R.id.topic_content)
-        var imageView : ImageView = view.findViewById(R.id.node_avatar)
-        val view:View = view
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var textView: TextView = view.findViewById(R.id.topic_content)
+        var imageView: ImageView = view.findViewById(R.id.node_avatar)
+        val view: View = view
     }
 }
