@@ -14,10 +14,24 @@ import com.johntsai.superv2ex.R
 import com.johntsai.superv2ex.data.Topic
 
 
-class TopicRecyclerViewAdapter(val context: Context, val dataList: List<Topic>) : RecyclerView.Adapter<TopicRecyclerViewAdapter.ViewHolder>() {
+class TopicRecyclerViewAdapter(val context: Context, val dataList: List<Topic>) : RecyclerView.Adapter<TopicRecyclerViewAdapter.ViewHolder>(), View.OnClickListener {
+
+    private var listener: OnItemClickListener? = null
+
+    override fun onClick(v: View?) {
+        if(listener != null) {
+            listener!!.onItemClick(v!!, v.getTag() as Int)
+        }
+    }
+
+    public fun setOnItemClickListener(listener: OnItemClickListener){
+        this.listener = listener
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val holder = ViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_topic, parent, false))
-        holder.view.setOnClickListener { v -> }
+        holder.view.setOnClickListener(this)
         return holder
     }
 
@@ -35,7 +49,7 @@ class TopicRecyclerViewAdapter(val context: Context, val dataList: List<Topic>) 
         }
 
         Glide.with(context).load("http:" + data.member.avatarNormal).into(holder.imageView)
-
+        holder.view.setTag(position)
     }
 
 
@@ -43,5 +57,9 @@ class TopicRecyclerViewAdapter(val context: Context, val dataList: List<Topic>) 
         var textView: TextView = view.findViewById(R.id.topic_content)
         var imageView: ImageView = view.findViewById(R.id.node_avatar)
         val view: View = view
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(view:View, position:Int);
     }
 }
