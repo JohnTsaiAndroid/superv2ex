@@ -49,7 +49,7 @@ class TopicRecyclerViewAdapter(val context: Context, val dataList: List<Topic>) 
         }
 
         Glide.with(context).load("http:" + data.member.avatarNormal).into(holder.imageView)
-        holder.view.setTag(position)
+        holder.view.tag = position
     }
 
 
