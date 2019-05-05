@@ -17,9 +17,11 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_toEndOf="@id/node_avatar"
+        android:textStyle="bold"
         />
 
     <TextView
+        android:id="@+id/last_reply_text"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_below="@id/topic_content"
