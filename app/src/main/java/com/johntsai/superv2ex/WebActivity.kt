@@ -23,7 +23,12 @@ class WebActivity: AppCompatActivity() {
         settings.defaultTextEncodingName = "utf-8"
         settings.loadsImagesAutomatically = true
         settings.allowFileAccess = true
-        settings.cacheMode = WebSettings.LOAD_DEFAULT
+        val path = filesDir.absolutePath + "cache/"
+        settings.domStorageEnabled = true
+        settings.databaseEnabled = true
+        settings.setAppCachePath(path)
+        settings.setAppCacheEnabled(true)
+        settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
         if(url != null) {
             webView!!.loadUrl(url)
         }

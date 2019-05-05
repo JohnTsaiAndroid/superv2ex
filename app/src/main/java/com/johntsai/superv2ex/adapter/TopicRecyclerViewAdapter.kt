@@ -52,8 +52,4 @@ class TopicRecyclerViewAdapter(val context: Context, val dataList: List<Topic>) 
         var imageView: ImageView = view.findViewById(R.id.node_avatar)
         var lastReplyTextView: TextView = view.findViewById(R.id.last_reply_text)
     }
-
-    interface OnItemClickListener {
-        fun onItemClick(view:View, position:Int);
-    }
 }

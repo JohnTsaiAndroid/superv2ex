@@ -11,13 +11,26 @@ import com.johntsai.superv2ex.R
 import com.johntsai.superv2ex.data.NodeData
 import java.util.*
 
-class NodeInfoRecyclerViewAdapter(val context: Context, val dataList: List<NodeData>) : RecyclerView.Adapter<NodeInfoRecyclerViewAdapter.ViewHolder>() {
+class NodeInfoRecyclerViewAdapter(val context: Context, val dataList: List<NodeData>) : RecyclerView.Adapter<NodeInfoRecyclerViewAdapter.ViewHolder>(), View.OnClickListener {
+
+    private var listener: OnItemClickListener? = null
+
+    override fun onClick(v: View?) {
+        if (listener != null) {
+            listener!!.onItemClick(v!!, v.tag as Int)
+        }
+    }
+
+    public fun setOnItemClickListener(listener: OnItemClickListener){
+        this.listener = listener
+    }
 
     private val random: Random = Random()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_node, parent, false))
-
+        var viewHolder = ViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_node, parent, false))
+        viewHolder.itemView.setOnClickListener(this)
+        return viewHolder
     }
 
     override fun getItemCount(): Int {
@@ -30,7 +43,8 @@ class NodeInfoRecyclerViewAdapter(val context: Context, val dataList: List<NodeD
         val r = random.nextInt(255)
         val g = random.nextInt(255)
         val b = random.nextInt(255)
-        holder.itemView.setBackgroundColor(Color.rgb(r,g,b))
+        holder.itemView.tag = position
+        holder.itemView.setBackgroundColor(Color.rgb(r, g, b))
     }
 
 

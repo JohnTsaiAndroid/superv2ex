@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.johntsai.superv2ex.R
 import com.johntsai.superv2ex.WebActivity
+import com.johntsai.superv2ex.adapter.OnItemClickListener
 import com.johntsai.superv2ex.adapter.TopicRecyclerViewAdapter
 import com.johntsai.superv2ex.data.Topic
 import retrofit2.Call
@@ -38,7 +39,7 @@ abstract class BaseTopicFragment:Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.setHasFixedSize(true)
         val intent = Intent(activity, WebActivity::class.java)
-        adapter.setOnItemClickListener(object : TopicRecyclerViewAdapter.OnItemClickListener{
+        adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
                 val data = datas[position]
                 intent.putExtra("url", data.url)

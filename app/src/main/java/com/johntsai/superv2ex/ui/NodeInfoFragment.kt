@@ -1,15 +1,17 @@
 package com.johntsai.superv2ex.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.johntsai.superv2ex.NodeDetailActivity
 import com.johntsai.superv2ex.R
 import com.johntsai.superv2ex.adapter.NodeInfoRecyclerViewAdapter
+import com.johntsai.superv2ex.adapter.OnItemClickListener
 import com.johntsai.superv2ex.data.NodeData
 import io.reactivex.Observable
 import io.reactivex.Observer
@@ -41,6 +43,14 @@ class NodeInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = NodeInfoRecyclerViewAdapter(view.context, dataList)
+        val intent = Intent(view.context, NodeDetailActivity::class.java)
+        adapter.setOnItemClickListener(object : OnItemClickListener{
+            override fun onItemClick(view: View, position: Int) {
+                val data = dataList[position]
+                intent.putExtra("href", data.href)
+                startActivity(intent)
+            }
+        })
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
