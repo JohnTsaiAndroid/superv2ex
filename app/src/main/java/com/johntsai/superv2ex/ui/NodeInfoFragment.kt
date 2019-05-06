@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.johntsai.superv2ex.NodeDetailActivity
 import com.johntsai.superv2ex.R
+import com.johntsai.superv2ex.WebActivity
 import com.johntsai.superv2ex.adapter.NodeInfoRecyclerViewAdapter
 import com.johntsai.superv2ex.adapter.OnItemClickListener
 import com.johntsai.superv2ex.data.NodeData
@@ -43,11 +43,11 @@ class NodeInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = NodeInfoRecyclerViewAdapter(view.context, dataList)
-        val intent = Intent(view.context, NodeDetailActivity::class.java)
+        val intent = Intent(view.context, WebActivity::class.java)
         adapter.setOnItemClickListener(object : OnItemClickListener{
             override fun onItemClick(view: View, position: Int) {
                 val data = dataList[position]
-                intent.putExtra("href", data.href)
+                intent.putExtra("url", "https://www.v2ex.com${data.href}")
                 startActivity(intent)
             }
         })

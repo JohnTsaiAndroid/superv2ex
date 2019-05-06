@@ -5,7 +5,7 @@ import android.util.SparseIntArray;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -14,7 +14,7 @@ import com.johntsai.superv2ex.ui.HotTopicFragment;
 import com.johntsai.superv2ex.ui.LatestTopicFragment;
 import com.johntsai.superv2ex.ui.NodeInfoFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private ViewPager mViewPager;
     private BottomNavigationView mBottomNavigationView;
@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager = findViewById(R.id.view_pager);
         mBottomNavigationView = findViewById(R.id.bottom_layout);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         array.append(0, R.id.action_hot_topic);
         array.append(1, R.id.action_latest_topic);

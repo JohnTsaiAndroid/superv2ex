@@ -1,20 +1,28 @@
 package com.johntsai.superv2ex
 
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
-import androidx.appcompat.app.AppCompatActivity
+import android.webkit.WebViewClient
+import androidx.appcompat.widget.Toolbar
 
-class WebActivity: AppCompatActivity() {
+class WebActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_web)
 
-        val webView = findViewById<WebView>(R.id.webview)
-        val url: String? = intent.getStringExtra("url");
+        val webView: WebView = findViewById(R.id.webview)
+        val url: String? = intent.getStringExtra("url")
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+
+        toolbar.setNavigationOnClickListener { finish() }
 
         val settings = webView.settings
         settings.javaScriptEnabled = true
@@ -29,8 +37,16 @@ class WebActivity: AppCompatActivity() {
         settings.setAppCachePath(path)
         settings.setAppCacheEnabled(true)
         settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
-        if(url != null) {
-            webView!!.loadUrl(url)
+        webView.webViewClient = object : WebViewClient(){
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                if(request?.url?.host?.contains("v2ex.com")!!){
+                    return false
+                }
+                return super.shouldOverrideUrlLoading(view, request)
+            }
+        }
+        if (url != null) {
+            webView.loadUrl(url)
         }
     }
 }
