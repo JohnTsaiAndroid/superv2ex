@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/hotTopicFragment"
         android:name="com.johntsai.superv2ex.ui.HotTopicFragment"
-        android:label="HotTopicFragment"
+        android:label="@string/menu_hot_topic"
         tools:layout="@layout/fragment_hot_topic">
         <action
             android:id="@+id/action_hotTopicFragment_to_webActivity"
@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/latestTopicFragment"
         android:name="com.johntsai.superv2ex.ui.LatestTopicFragment"
-        android:label="LatestTopicFragment"
+        android:label="@string/menu_latest_topic"
         tools:layout="@layout/fragment_latest_topic">
         <action
             android:id="@+id/action_latestTopicFragment_to_webActivity"
