@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:id="@+id/hotTopicFragment"
+        android:title="@string/menu_hot_topic" />
+    <item android:id="@+id/latestTopicFragment"
+        android:title="@string/menu_latest_topic" />
+</menu>

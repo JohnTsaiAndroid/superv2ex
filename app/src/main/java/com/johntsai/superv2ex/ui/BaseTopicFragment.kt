@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.johntsai.superv2ex.R
@@ -17,7 +19,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-abstract class BaseTopicFragment:Fragment() {
+abstract class BaseTopicFragment : Fragment(), OnItemClickListener {
+    override fun onItemClick(view: View, position: Int) {
+
+    }
 
     abstract fun getCall();
 
@@ -25,6 +30,15 @@ abstract class BaseTopicFragment:Fragment() {
     lateinit var adapter: TopicRecyclerViewAdapter
     val datas: MutableList<Topic> = ArrayList()
     lateinit var call: Call<List<Topic>>
+
+    val options = navOptions {
+        anim {
+            enter = R.anim.slide_in_right
+            exit = R.anim.slide_out_left
+            popEnter = R.anim.slide_in_left
+            popExit = R.anim.slide_out_right
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_hot_topic, container, false)
@@ -34,18 +48,12 @@ abstract class BaseTopicFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        adapter = TopicRecyclerViewAdapter(view.context,datas)
+        adapter = TopicRecyclerViewAdapter(view.context, datas)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.setHasFixedSize(true)
         val intent = Intent(activity, WebActivity::class.java)
-        adapter.setOnItemClickListener(object : OnItemClickListener {
-            override fun onItemClick(view: View, position: Int) {
-                val data = datas[position]
-                intent.putExtra("url", data.url)
-                startActivity(intent)
-            }
-        })
+        adapter.setOnItemClickListener(this)
 
         getCall()
         call.enqueue(object : Callback<List<Topic>> {
@@ -67,7 +75,6 @@ abstract class BaseTopicFragment:Fragment() {
         super.onDestroyView()
         call.cancel()
     }
-
 
 
 }

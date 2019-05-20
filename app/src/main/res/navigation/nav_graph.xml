@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/hotTopicFragment"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <fragment
+        android:id="@+id/hotTopicFragment"
+        android:name="com.johntsai.superv2ex.ui.HotTopicFragment"
+        android:label="HotTopicFragment"
+        tools:layout="@layout/fragment_hot_topic">
+        <action
+            android:id="@+id/action_hotTopicFragment_to_webActivity"
+            app:destination="@id/webActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/webActivity"
+        android:name="com.johntsai.superv2ex.WebActivity"
+        android:label="WebActivity" />
+    <fragment
+        android:id="@+id/latestTopicFragment"
+        android:name="com.johntsai.superv2ex.ui.LatestTopicFragment"
+        android:label="LatestTopicFragment"
+        tools:layout="@layout/fragment_latest_topic">
+        <action
+            android:id="@+id/action_latestTopicFragment_to_webActivity"
+            app:destination="@id/webActivity" />
+    </fragment>
+</navigation>

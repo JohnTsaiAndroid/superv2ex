@@ -19,7 +19,7 @@ class TopicRecyclerViewAdapter(val context: Context, val dataList: List<Topic>) 
 
     override fun onClick(v: View?) {
         if(listener != null) {
-            listener!!.onItemClick(v!!, v.getTag() as Int)
+            listener!!.onItemClick(v!!, v.tag as Int)
         }
     }
 

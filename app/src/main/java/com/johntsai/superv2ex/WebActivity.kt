@@ -15,7 +15,7 @@ class WebActivity : BaseActivity() {
         setContentView(R.layout.activity_web)
 
         val webView: WebView = findViewById(R.id.webview)
-        val url: String? = intent.getStringExtra("url")
+        val url: String? = intent.extras?.getString("url")
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
