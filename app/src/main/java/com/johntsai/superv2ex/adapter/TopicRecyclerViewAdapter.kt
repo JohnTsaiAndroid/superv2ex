@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.johntsai.superv2ex.R
 import com.johntsai.superv2ex.data.Topic
+import com.johntsai.superv2ex.utils.addHttps
 import com.johntsai.superv2ex.utils.setHtml
 
 
@@ -18,12 +19,12 @@ class TopicRecyclerViewAdapter(val context: Context, val dataList: List<Topic>) 
     private var listener: OnItemClickListener? = null
 
     override fun onClick(v: View?) {
-        if(listener != null) {
+        if (listener != null) {
             listener!!.onItemClick(v!!, v.tag as Int)
         }
     }
 
-    public fun setOnItemClickListener(listener: OnItemClickListener){
+    public fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
 
@@ -41,7 +42,7 @@ class TopicRecyclerViewAdapter(val context: Context, val dataList: List<Topic>) 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = dataList[position]
         holder.textView.setHtml(data.title)
-        Glide.with(context).load("http:" + data.member.avatarNormal).into(holder.imageView)
+        Glide.with(context).load(data.member.avatarNormal.addHttps()).into(holder.imageView)
         holder.lastReplyTextView.text = "最后回复来自:${data.lastReplyBy}"
         holder.itemView.tag = position
     }
