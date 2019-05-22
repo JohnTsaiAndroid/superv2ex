@@ -1,34 +1,28 @@
 package com.johntsai.superv2ex.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.johntsai.superv2ex.R
-import com.johntsai.superv2ex.WebActivity
 import com.johntsai.superv2ex.adapter.OnItemClickListener
-import com.johntsai.superv2ex.adapter.TopicRecyclerViewAdapter
+import com.johntsai.superv2ex.adapter.TopicAdapter
 import com.johntsai.superv2ex.data.Topic
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-abstract class BaseTopicFragment : Fragment(), OnItemClickListener {
-    override fun onItemClick(view: View, position: Int) {
+abstract class BaseTopicFragment : Fragment() , OnItemClickListener <Topic> {
 
-    }
-
-    abstract fun getCall();
+    override fun onItemClick(view: View, data: Topic) {}
+    abstract fun getCall()
 
     lateinit var recyclerView: RecyclerView
-    lateinit var adapter: TopicRecyclerViewAdapter
-    val datas: MutableList<Topic> = ArrayList()
+    lateinit var adapter: TopicAdapter
     lateinit var call: Call<List<Topic>>
 
     val options = navOptions {
@@ -48,11 +42,10 @@ abstract class BaseTopicFragment : Fragment(), OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        adapter = TopicRecyclerViewAdapter(view.context, datas)
+        adapter = TopicAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.setHasFixedSize(true)
-        val intent = Intent(activity, WebActivity::class.java)
         adapter.setOnItemClickListener(this)
 
         getCall()
@@ -63,8 +56,7 @@ abstract class BaseTopicFragment : Fragment(), OnItemClickListener {
             override fun onResponse(result: Call<List<Topic>>, response: Response<List<Topic>>) {
                 val topicList = response.body();
                 if (topicList != null) {
-                    datas.addAll(topicList)
-                    adapter.notifyDataSetChanged()
+                    adapter.submitList(topicList)
                 }
             }
 

@@ -24,7 +24,7 @@ open class OnItemSelectedListener : AdapterView.OnItemSelectedListener {
 
 fun String.addHttps(): String {
     if (this.startsWith("//")) {
-        return "https$this"
+        return "https:$this"
     }
     return this
 }
