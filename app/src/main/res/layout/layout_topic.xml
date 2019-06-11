@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="100dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/node_avatar"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:padding="5dp"
-        android:layout_alignParentStart="true"
-        />
+    <data>
+        <variable
+            name="topic"
+            type="com.johntsai.superv2ex.data.Topic" />
+    </data>
 
-    <TextView
-        android:id="@+id/topic_content"
+    <RelativeLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_toEndOf="@id/node_avatar"
-        android:textStyle="bold"
-        />
+        android:layout_height="100dp">
 
-    <TextView
-        android:id="@+id/last_reply_text"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@id/topic_content"
-        android:layout_toEndOf="@id/node_avatar"
-        />
+        <ImageView
+            android:id="@+id/node_avatar"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:padding="5dp"
+            android:layout_alignParentStart="true"
+            app:imagesrc="@{topic.member.avatarNormal}"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/topic_content"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_toEndOf="@id/node_avatar"
+            android:textStyle="bold"
+            app:html="@{topic.title}"
+            />
+
+        <TextView
+            android:id="@+id/last_reply_text"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/topic_content"
+            android:layout_toEndOf="@id/node_avatar"
+            android:text="@{topic.lastReplyBy}"
+            />
+
+    </RelativeLayout>
+</layout>

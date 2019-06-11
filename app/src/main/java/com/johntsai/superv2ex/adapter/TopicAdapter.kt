@@ -3,17 +3,14 @@ package com.johntsai.superv2ex.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.johntsai.superv2ex.BR
 import com.johntsai.superv2ex.R
 import com.johntsai.superv2ex.data.Topic
-import com.johntsai.superv2ex.utils.addHttps
-import com.johntsai.superv2ex.utils.setHtml
 
 class TopicAdapter: ListAdapter<Topic, TopicAdapter.ViewHolder>(TopicDiffCallback()), View.OnClickListener {
 
@@ -25,12 +22,15 @@ class TopicAdapter: ListAdapter<Topic, TopicAdapter.ViewHolder>(TopicDiffCallbac
         }
     }
 
-    public fun setOnItemClickListener(listener: OnItemClickListener<Topic>) {
+    fun setOnItemClickListener(listener: OnItemClickListener<Topic>) {
         this.listener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val holder = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.layout_topic, parent, false))
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val viewDataBinding
+                = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.layout_topic, parent, false)
+        val holder = ViewHolder(viewDataBinding)
         holder.itemView.setOnClickListener(this)
         return holder
     }
@@ -40,19 +40,14 @@ class TopicAdapter: ListAdapter<Topic, TopicAdapter.ViewHolder>(TopicDiffCallbac
     }
 
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view){
-        var textView: TextView = view.findViewById(R.id.topic_content)
-        var imageView: ImageView = view.findViewById(R.id.node_avatar)
-        var lastReplyTextView: TextView = view.findViewById(R.id.last_reply_text)
+    class ViewHolder(dataBinding: ViewDataBinding) : RecyclerView.ViewHolder(dataBinding.root) {
+
+        private val viewDataBinding = dataBinding
 
         fun bind(topic: Topic){
             itemView.tag = topic
-            textView.setHtml(topic.title)
-            Glide.with(itemView.context)
-                    .load(topic.member.avatarNormal.addHttps())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imageView)
-            lastReplyTextView.text = "最后回复来自:${topic.lastReplyBy}"
+            viewDataBinding.setVariable(BR.topic, topic)
+            viewDataBinding.executePendingBindings()
 
         }
     }
